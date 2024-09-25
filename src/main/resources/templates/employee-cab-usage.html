@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Cab Usage</title>
+</head>
+<body>
+<h1>Employee Cab Usage for the Month</h1>
+<form th:action="@{/employeeCabUsage}" method="post">
+    <label for="employeeName">Employee Name:</label>
+    <input type="text" id="employeeName" name="employeeName" />
+
+    <label for="month">Month (YYYY-MM):</label>
+    <input type="month" id="month" name="month" />
+
+    <button type="submit">Submit</button>
+</form>
+
+<h2 th:if="${not #lists.isEmpty(cabUsages)}">Cab Usage for <span th:text="${employeeName}"></span>:</h2>
+<ul class="list-group" th:if="${not #lists.isEmpty(cabUsages)}">
+    <li class="list-group-item" th:each="usage : ${cabUsages}">
+        <span th:text="${usage.cabDate.format(T(java.time.format.DateTimeFormatter).ofPattern('yyyy-MM-dd'))}"></span>
+    </li>
+</ul>
+</body>
+</html>

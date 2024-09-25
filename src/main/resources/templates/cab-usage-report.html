@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cab Usage Report</title>
+</head>
+<body>
+<h1>Cab Usage Report for <span th:text="${employeeName}"></span></h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usage : ${cabUsageList}">
+        <td th:text="${usage.cabDate}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

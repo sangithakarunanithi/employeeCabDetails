@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cab Usage Form</title>
+</head>
+<body>
+<h1>Enter Cab Usage</h1>
+<form th:action="@{/saveCabUsage}" th:object="${cabUsage}" method="post">
+    <label for="employeeName">Employee Name:</label>
+    <input type="text" id="employeeName" th:field="*{employeeName}" required />
+
+    <label for="cabDate">Date:</label>
+    <input type="date" id="cabDate" th:field="*{cabDate}" required />
+
+    <button type="submit">Submit</button>
+</form>
+
+<p th:text="${message}"></p>
+</body>
+</html>
