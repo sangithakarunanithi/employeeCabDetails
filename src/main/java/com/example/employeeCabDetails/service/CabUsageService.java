@@ -20,7 +20,7 @@ public class CabUsageService {
     }
 
     public List<CabUsage> getEmployeeCabUsageForMonth(String employeeName, LocalDate startDate, LocalDate endDate) {
-        return repository.findByEmployeeNameAndCabDateBetween(employeeName, startDate, endDate);
+        return repository.findUniqueByEmployeeNameAndCabDateBetween(employeeName, startDate, endDate);
     }
 }
 

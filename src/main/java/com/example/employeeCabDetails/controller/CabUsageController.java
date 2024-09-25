@@ -1,8 +1,10 @@
 package com.example.employeeCabDetails.controller;
 
 import com.example.employeeCabDetails.entity.CabUsage;
+import com.example.employeeCabDetails.repository.CabUsageRepository;
 import com.example.employeeCabDetails.service.CabUsageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,9 @@ public class CabUsageController {
 
     @Autowired
     private CabUsageService cabUsageService;
+
+    @Autowired
+    private CabUsageRepository cabUsageRepository;
 
     @GetMapping("/")
     public String showLandingPage() {
@@ -62,5 +67,14 @@ public class CabUsageController {
         return "employee-cab-usage";
     }
 
+    @DeleteMapping("/deleteCabUsage/{id}")
+    public ResponseEntity<?> deleteCabUsage(@PathVariable Long id) {
+        if (cabUsageRepository.existsById(id)) {
+            cabUsageRepository.deleteById(id);
+            return ResponseEntity.ok().build(); // Return OK status on successful deletion
+        } else {
+            return ResponseEntity.notFound().build(); // Return Not Found if record doesn't exist
+        }
+    }
 
 }
