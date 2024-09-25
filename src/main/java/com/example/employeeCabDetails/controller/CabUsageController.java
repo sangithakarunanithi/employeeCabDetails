@@ -14,6 +14,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,10 +63,16 @@ public class CabUsageController {
 
         List<CabUsage> cabUsages = cabUsageService.getEmployeeCabUsageForMonth(employeeName, startDate, endDate);
 
+        // Sort cabUsages by cabDate
+        if (cabUsages != null) {
+            cabUsages.sort(Comparator.comparing(CabUsage::getCabDate));
+        }
+
         model.addAttribute("cabUsages", cabUsages != null ? cabUsages : new ArrayList<>());
         model.addAttribute("employeeName", employeeName);
         return "employee-cab-usage";
     }
+
 
     @DeleteMapping("/deleteCabUsage/{id}")
     public ResponseEntity<?> deleteCabUsage(@PathVariable Long id) {
