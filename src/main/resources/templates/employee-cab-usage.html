@@ -2,24 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Employee Cab Usage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Employee Cab Usage for the Month</h1>
-<form th:action="@{/employeeCabUsage}" method="post">
-    <label for="employeeName">Employee Name:</label>
-    <input type="text" id="employeeName" name="employeeName" />
+<div class="container mt-5">
+    <h1 class="text-center">Employee Cab Usage for the Month</h1>
+    <form th:action="@{/employeeCabUsage}" method="post" class="mt-4">
+        <div class="form-group">
+            <label for="employeeName">Employee Name:</label>
+            <input type="text" id="employeeName" name="employeeName" class="form-control" required />
+        </div>
 
-    <label for="month">Month (YYYY-MM):</label>
-    <input type="month" id="month" name="month" />
+        <div class="form-group">
+            <label for="month">Month (YYYY-MM):</label>
+            <input type="month" id="month" name="month" class="form-control" required />
+        </div>
 
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button onclick="location.href='/'" type="button" class="btn btn-secondary">Go to Landing Page</button>
+    </form>
 
-<h2 th:if="${not #lists.isEmpty(cabUsages)}">Cab Usage for <span th:text="${employeeName}"></span>:</h2>
-<ul class="list-group" th:if="${not #lists.isEmpty(cabUsages)}">
-    <li class="list-group-item" th:each="usage : ${cabUsages}">
-        <span th:text="${usage.cabDate.format(T(java.time.format.DateTimeFormatter).ofPattern('yyyy-MM-dd'))}"></span>
-    </li>
-</ul>
+    <h2 class="mt-4" th:if="${not #lists.isEmpty(cabUsages)}">Cab Usage for <span th:text="${employeeName}"></span>:</h2>
+
+    <table class="table table-striped" th:if="${not #lists.isEmpty(cabUsages)}">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usage, iterStat : ${cabUsages}">
+            <td th:text="${iterStat.index + 1}"></td> <!-- Serial number -->
+            <td th:text="${usage.cabDate.format(T(java.time.format.DateTimeFormatter).ofPattern('yyyy-MM-dd'))}"></td> <!-- Cab date -->
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

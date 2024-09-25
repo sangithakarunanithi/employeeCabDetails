@@ -22,6 +22,12 @@ public class CabUsageController {
     @Autowired
     private CabUsageService cabUsageService;
 
+    @GetMapping("/")
+    public String showLandingPage() {
+        return "landing-page";
+    }
+
+
     @GetMapping("/cab-usage")
     public String showCabUsageForm(Model model) {
         model.addAttribute("cabUsage", new CabUsage());

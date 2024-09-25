@@ -2,19 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cab Usage Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Enter Cab Usage</h1>
-<form th:action="@{/saveCabUsage}" th:object="${cabUsage}" method="post">
-    <label for="employeeName">Employee Name:</label>
-    <input type="text" id="employeeName" th:field="*{employeeName}" required />
+<div class="container mt-5">
+    <h1 class="text-center">Enter Cab Usage</h1>
+    <form th:action="@{/saveCabUsage}" th:object="${cabUsage}" method="post" class="mt-4">
+        <div class="form-group">
+            <label for="employeeName">Employee Name:</label>
+            <input type="text" id="employeeName" th:field="*{employeeName}" class="form-control" required />
+        </div>
 
-    <label for="cabDate">Date:</label>
-    <input type="date" id="cabDate" th:field="*{cabDate}" required />
+        <div class="form-group">
+            <label for="cabDate">Date:</label>
+            <input type="date" id="cabDate" th:field="*{cabDate}" class="form-control" required />
+        </div>
 
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button onclick="location.href='/'" type="button" class="btn btn-secondary">Go to Landing Page</button>
+    </form>
 
-<p th:text="${message}"></p>
+    <p class="text-success mt-3" th:text="${message}"></p>
+</div>
 </body>
 </html>
