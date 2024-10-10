@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: employeeCabDetails
+    env: java
+    plan: free
+    runtime: java17
+    buildCommand: "mvn clean package"
+    startCommand: "java -jar target/employeeCabDetails-0.0.1-SNAPSHOT.jar"
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
